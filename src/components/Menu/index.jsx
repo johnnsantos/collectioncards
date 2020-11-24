@@ -1,7 +1,6 @@
 import { Tabs, Box } from "@material-ui/core";
 import { Link, useLocation } from "react-router-dom";
 import { StyledAppBar, StyledTab } from "./styles.js";
-import HomeIcon from "@material-ui/icons/Home";
 import StarIcon from "@material-ui/icons/Star";
 import { CgPokemon } from "react-icons/cg";
 import { GiMaterialsScience } from "react-icons/gi";
@@ -18,18 +17,11 @@ const Menu = () => {
           orientation={window.innerWidth < 600 ? "vertical" : "horizontal"}
         >
           <StyledTab
-            icon={<HomeIcon />}
-            label="Home"
-            component={Link}
-            to="/"
-            value="/"
-          />
-          <StyledTab
             icon={<CgPokemon />}
             label="Pokemons"
             component={Link}
-            to="/pokemonspage"
-            value="/pokemonspage"
+            to="/"
+            value="/"
           />
           <StyledTab
             icon={<GiMaterialsScience />}

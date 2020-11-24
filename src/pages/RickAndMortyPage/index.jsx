@@ -8,7 +8,7 @@ const RickAndMortyPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
-      <h1>Rick e Morty Favoritos</h1>
+      <h1>Página de Rick e Morty</h1>
     </motion.div>
   );
 };
