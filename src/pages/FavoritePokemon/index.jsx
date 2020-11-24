@@ -10,6 +10,7 @@ const FavoritePokemon = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
+      <SearchBar />
       <ButtonsPagination />
       <h1>Pokemons Favoritos</h1>
     </motion.div>

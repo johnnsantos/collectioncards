@@ -23,6 +23,7 @@ const PokemonsPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
+      <SearchBar />
       <ButtonsPagination />
       <StyledBox></StyledBox>
     </motion.div>

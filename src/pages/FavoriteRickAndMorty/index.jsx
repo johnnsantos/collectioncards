@@ -10,6 +10,7 @@ const FavoriteRickAndMorty = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
+      <SearchBar />
       <ButtonsPagination />
       <h1>Rick e Morty Favoritos</h1>
     </motion.div>
