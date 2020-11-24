@@ -7,14 +7,12 @@ const PokemonsPage = () => {
   const [data, setData] = useState([]);
   const [images, setImages] = useState([]);
 
-  useEffect(() => {
-    axios.get("https://pokeapi.co/api/v2/pokemon?limit=150").then((res) => {
-      setData(res.data.results);
-      console.log(data);
-    });
-  });
-
-  useEffect(() => {}, [data]);
+  // useEffect(() => {
+  //   axios.get("https://pokeapi.co/api/v2/pokemon?limit=150").then((res) => {
+  //     setData(res.data.results);
+  //     console.log(data);
+  //   });
+  // });
 
   return (
     <motion.div

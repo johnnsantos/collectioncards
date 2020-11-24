@@ -1,6 +1,19 @@
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { StyledBox } from "./styles";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardHeader,
+  IconButton,
+  Avatar,
+  Grid,
+} from "@material-ui/core";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const RickAndMortyPage = () => {
   const [data, setData] = useState([]);
@@ -9,9 +22,9 @@ const RickAndMortyPage = () => {
     axios
       .get("https://rickandmortyapi.com/api/character/?page=1")
       .then((res) => {
-        console.log(res);
+        setData(res.data.results);
       });
-  });
+  }, [setData]);
 
   return (
     <motion.div
@@ -19,7 +32,55 @@ const RickAndMortyPage = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
-    ></motion.div>
+    >
+      <StyledBox>
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="center"
+          spacing={2}
+        >
+          {data.map(({ name, image, species }, index) => (
+            <Grid xs={4} item key={index}>
+              <Card key={index}>
+                <CardHeader
+                  avatar={<Avatar src={image}></Avatar>}
+                  title={name}
+                />
+                <CardMedia
+                  style={{
+                    height: "40px",
+                    margin: "auto",
+                    paddingLeft: "80%",
+                    paddingTop: "80%",
+                    width: "30px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  image={image}
+                />
+                <CardContent>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {name}, {species}
+                  </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                  <IconButton>
+                    <FavoriteIcon />
+                  </IconButton>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </StyledBox>
+    </motion.div>
   );
 };
 
