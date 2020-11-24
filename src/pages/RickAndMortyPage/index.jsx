@@ -14,17 +14,19 @@ import {
   Grid,
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import ButtonsPagination from "../../components/ButtonsPagination";
 
 const RickAndMortyPage = () => {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     axios
-      .get("https://rickandmortyapi.com/api/character/?page=1")
+      .get(`https://rickandmortyapi.com/api/character/?page=${page}`)
       .then((res) => {
         setData(res.data.results);
       });
-  }, [setData]);
+  }, [setData, page]);
 
   return (
     <motion.div
@@ -33,6 +35,18 @@ const RickAndMortyPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
+      <ButtonsPagination
+        prev={() => {
+          if (page > 1) {
+            setPage(page - 1);
+          }
+        }}
+        next={() => {
+          if (page < 35) {
+            setPage(page + 1);
+          }
+        }}
+      />
       <StyledBox>
         <Grid
           container

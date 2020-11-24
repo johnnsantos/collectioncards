@@ -3,14 +3,14 @@ import { Button } from "@material-ui/core";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
-const ButtonsPagination = () => {
+const ButtonsPagination = (props) => {
   return (
     <StyledBox>
-      <Button variant="contained">
+      <Button variant="contained" onClick={props.prev}>
         <NavigateBeforeIcon />
         Anterior
       </Button>
-      <Button variant="contained">
+      <Button variant="contained" onClick={props.next}>
         Próximo
         <NavigateNextIcon />
       </Button>

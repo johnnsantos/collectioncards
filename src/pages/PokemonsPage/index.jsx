@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { StyledBox } from "./styles.js";
+import ButtonsPagination from "../../components/ButtonsPagination";
 
 const PokemonsPage = () => {
   const [data, setData] = useState([]);
@@ -21,6 +22,7 @@ const PokemonsPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
+      <ButtonsPagination />
       <StyledBox></StyledBox>
     </motion.div>
   );

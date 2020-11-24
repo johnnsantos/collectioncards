@@ -6,7 +6,6 @@ import RickAndMortyPage from "../pages/RickAndMortyPage";
 import Menu from "../components/Menu";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import SearchBar from "../components/SearchBar";
-import ButtonsPagination from "../components/ButtonsPagination";
 
 const Routes = () => {
   return (
@@ -14,7 +13,6 @@ const Routes = () => {
       <CssBaseline />
       <Menu />
       <SearchBar />
-      <ButtonsPagination />
       <Switch>
         <Route path="/favoritepokemon" component={FavoritePokemon} />
         <Route path="/favoriterickandmorty" component={FavoriteRickAndMorty} />
