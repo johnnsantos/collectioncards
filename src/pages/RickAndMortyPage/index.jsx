@@ -42,7 +42,7 @@ const RickAndMortyPage = () => {
           spacing={2}
         >
           {data.map(({ name, image, species }, index) => (
-            <Grid xs={4} item key={index}>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <Card key={index}>
                 <CardHeader
                   avatar={<Avatar src={image}></Avatar>}
@@ -72,6 +72,13 @@ const RickAndMortyPage = () => {
                 </CardContent>
                 <CardActions disableSpacing>
                   <IconButton>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      Favoritar
+                    </Typography>
                     <FavoriteIcon />
                   </IconButton>
                 </CardActions>
