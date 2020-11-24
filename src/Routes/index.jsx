@@ -1,5 +1,4 @@
 import { Switch, Route } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 import Home from "../pages/Home";
 import FavoritePokemon from "../pages/FavoritePokemon";
 import FavoriteRickAndMorty from "../pages/FavoriteRickAndMorty";
@@ -11,7 +10,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 const Routes = () => {
   return (
-    // <AnimatePresence>
     <>
       <CssBaseline />
       <Menu />
@@ -24,7 +22,6 @@ const Routes = () => {
         <Route path="/rickandmortypage" component={RickAndMortyPage} />
       </Switch>
     </>
-    // </AnimatePresence>
   );
 };
 
