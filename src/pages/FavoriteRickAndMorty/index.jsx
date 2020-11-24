@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import ButtonsPagination from "../../components/ButtonsPagination";
+import SearchBar from "../../components/SearchBar";
 
 const FavoriteRickAndMorty = () => {
   return (

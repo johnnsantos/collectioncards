@@ -5,14 +5,12 @@ import PokemonsPage from "../pages/PokemonsPage";
 import RickAndMortyPage from "../pages/RickAndMortyPage";
 import Menu from "../components/Menu";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import SearchBar from "../components/SearchBar";
 
 const Routes = () => {
   return (
     <>
       <CssBaseline />
       <Menu />
-      <SearchBar />
       <Switch>
         <Route path="/favoritepokemon" component={FavoritePokemon} />
         <Route path="/favoriterickandmorty" component={FavoriteRickAndMorty} />

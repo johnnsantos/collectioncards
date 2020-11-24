@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { StyledBox } from "./styles.js";
 import ButtonsPagination from "../../components/ButtonsPagination";
+import SearchBar from "../../components/SearchBar";
 
 const PokemonsPage = () => {
   const [data, setData] = useState([]);
