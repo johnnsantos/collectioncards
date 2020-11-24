@@ -24,7 +24,19 @@ const RickAndMortyPage = (props) => {
     filteredCharacters: [],
   });
 
-  const { characterList, nextUrl, filteredCharacters } = characterAPI;
+  const [page, setPage] = useState({
+    start: 0,
+    range: 20,
+  });
+
+  const {
+    characterList,
+    nextUrl,
+    filteredCharacters,
+    favoritesCharacters,
+  } = characterAPI;
+
+  const { start, range } = page;
 
   const getCharacters = () => {
     if (nextUrl) {
@@ -37,15 +49,6 @@ const RickAndMortyPage = (props) => {
     }
   };
 
-  const [page, setPage] = useState({
-    start: 0,
-    range: 20,
-  });
-
-  const { start, range } = page;
-
-  useEffect(getCharacters, [nextUrl, characterList]);
-
   const filterCharacter = (e) => {
     let search = e.target.value;
     let setCharacterFilter = characterList.filter((character) =>
@@ -56,6 +59,16 @@ const RickAndMortyPage = (props) => {
       filteredCharacters: setCharacterFilter,
     });
   };
+
+  const addToFavorite = (index) => {
+    setCharacterAPI({
+      ...characterAPI,
+      favoritesCharacters: favoritesCharacters.push(index),
+    });
+    console.log(favoritesCharacters);
+  };
+
+  useEffect(getCharacters, [nextUrl, characterList]);
 
   return (
     <motion.div
@@ -124,7 +137,11 @@ const RickAndMortyPage = (props) => {
                         </Typography>
                       </CardContent>
                       <CardActions disableSpacing>
-                        <IconButton>
+                        <IconButton
+                          onClick={() => {
+                            addToFavorite(index);
+                          }}
+                        >
                           <Typography
                             variant="body2"
                             color="textSecondary"
@@ -170,7 +187,11 @@ const RickAndMortyPage = (props) => {
                         </Typography>
                       </CardContent>
                       <CardActions disableSpacing>
-                        <IconButton>
+                        <IconButton
+                          onClick={() => {
+                            addToFavorite(index);
+                          }}
+                        >
                           <Typography
                             variant="body2"
                             color="textSecondary"

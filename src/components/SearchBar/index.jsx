@@ -5,7 +5,7 @@ import { StyledBox } from "./styles.js";
 const SearchBar = (props) => {
   return (
     <StyledBox>
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <TextField label="Pesquisar" onChange={props.function} />
         <Button variant="contained" onClick={props.function}>
           <BsSearch />
