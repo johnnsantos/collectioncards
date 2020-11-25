@@ -17,7 +17,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ButtonsPagination from "../../components/ButtonsPagination";
 import SearchBar from "../../components/SearchBar";
 
-const RickAndMortyPage = (props) => {
+const RickAndMortyPage = () => {
   const [characterAPI, setCharacterAPI] = useState({
     characterList: [],
     nextUrl: "https://rickandmortyapi.com/api/character/",
@@ -56,6 +56,12 @@ const RickAndMortyPage = (props) => {
     });
   };
 
+  const [favoritesRickMorty, setFavoritesRickMorty] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("favoritesrickmorty", favoritesRickMorty);
+  }, [favoritesRickMorty]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -91,102 +97,116 @@ const RickAndMortyPage = (props) => {
           spacing={2}
         >
           {filteredCharacters
-            ? filteredCharacters
-                .slice(start, range)
-                .map(({ name, image, species }, index) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                    <Card key={index}>
-                      <CardHeader
-                        avatar={<Avatar src={image}></Avatar>}
-                        title={name}
-                      />
-                      <CardMedia
-                        style={{
-                          height: "40px",
-                          margin: "auto",
-                          paddingLeft: "80%",
-                          paddingTop: "80%",
-                          width: "30px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+            ? filteredCharacters.slice(start, range).map((character, index) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                  <Card key={index}>
+                    <CardHeader
+                      avatar={<Avatar src={character.image}></Avatar>}
+                      title={character.name}
+                    />
+                    <CardMedia
+                      style={{
+                        height: "40px",
+                        margin: "auto",
+                        paddingLeft: "80%",
+                        paddingTop: "80%",
+                        width: "30px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      image={character.image}
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="h6"
+                        color="textPrimary"
+                        component="p"
+                        style={{ textTransform: "capitalize" }}
+                        align="center"
+                      >
+                        {character.name}, {character.species}
+                      </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                      <IconButton
+                        onClick={() => {
+                          if (!favoritesRickMorty.includes(character.id)) {
+                            setFavoritesRickMorty([
+                              ...favoritesRickMorty,
+                              character.id,
+                            ]);
+                          }
                         }}
-                        image={image}
-                      />
-                      <CardContent>
-                        <Typography
-                          variant="h6"
-                          color="textPrimary"
-                          component="p"
-                          style={{ textTransform: "capitalize" }}
-                          align="center"
-                        >
-                          {name}, {species}
-                        </Typography>
-                      </CardContent>
-                      <CardActions disableSpacing>
-                        <IconButton onClick={() => {}}>
-                          <FavoriteIcon />
-                        </IconButton>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          component="p"
-                        >
-                          Favoritar
-                        </Typography>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))
-            : characterList
-                .slice(start, range)
-                .map(({ name, image, species }, index) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                    <Card key={index}>
-                      <CardHeader
-                        avatar={<Avatar src={image}></Avatar>}
-                        title={name}
-                      />
-                      <CardMedia
-                        style={{
-                          height: "40px",
-                          margin: "auto",
-                          paddingLeft: "80%",
-                          paddingTop: "80%",
-                          width: "30px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+                      >
+                        <FavoriteIcon />
+                      </IconButton>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        Favoritar
+                      </Typography>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))
+            : characterList.slice(start, range).map((character, index) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                  <Card key={index}>
+                    <CardHeader
+                      avatar={<Avatar src={character.image}></Avatar>}
+                      title={character.name}
+                    />
+                    <CardMedia
+                      style={{
+                        height: "40px",
+                        margin: "auto",
+                        paddingLeft: "80%",
+                        paddingTop: "80%",
+                        width: "30px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      image={character.image}
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="h6"
+                        color="textPrimary"
+                        component="p"
+                        style={{ textTransform: "capitalize" }}
+                        align="center"
+                      >
+                        {character.name}, {character.species}
+                      </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                      <IconButton
+                        onClick={() => {
+                          if (!favoritesRickMorty.includes(character.id)) {
+                            setFavoritesRickMorty([
+                              ...favoritesRickMorty,
+                              character.id,
+                            ]);
+                          }
                         }}
-                        image={image}
-                      />
-                      <CardContent>
-                        <Typography
-                          variant="h6"
-                          color="textPrimary"
-                          component="p"
-                          style={{ textTransform: "capitalize" }}
-                          align="center"
-                        >
-                          {name}, {species}
-                        </Typography>
-                      </CardContent>
-                      <CardActions disableSpacing>
-                        <IconButton onClick={() => {}}>
-                          <FavoriteIcon />
-                        </IconButton>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          component="p"
-                        >
-                          Favoritar
-                        </Typography>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
+                      >
+                        <FavoriteIcon />
+                      </IconButton>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        Favoritar
+                      </Typography>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
         </Grid>
       </StyledBox>
     </motion.div>
