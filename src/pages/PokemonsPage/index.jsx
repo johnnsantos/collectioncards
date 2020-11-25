@@ -31,13 +31,15 @@ const PokemonsPage = (props) => {
   });
   const { start, range } = page;
 
-  useEffect(() => {
+  const getCharacters = () => {
     axios.get("https://pokeapi.co/api/v2/pokemon?limit=150").then((res) => {
       setCharacterAPI({
         characterList: [...characterList, ...res.data.results],
       });
     });
-  }, [setCharacterAPI]);
+  };
+
+  useEffect(getCharacters, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filterCharacter = (e) => {
     let search = e.target.value;
@@ -121,7 +123,7 @@ const PokemonsPage = (props) => {
                         </Typography>
                       </CardContent>
                       <CardActions disableSpacing>
-                        <IconButton onClick={() => {}}>
+                        <IconButton>
                           <FavoriteIcon />
                         </IconButton>
                         <Typography
@@ -169,7 +171,7 @@ const PokemonsPage = (props) => {
                       </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
-                      <IconButton onClick={() => {}}>
+                      <IconButton>
                         <FavoriteIcon />
                       </IconButton>
                       <Typography
