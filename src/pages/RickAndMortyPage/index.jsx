@@ -118,6 +118,8 @@ const RickAndMortyPage = (props) => {
                           variant="h6"
                           color="textPrimary"
                           component="p"
+                          style={{ textTransform: "capitalize" }}
+                          align="center"
                         >
                           {name}, {species}
                         </Typography>
@@ -164,6 +166,8 @@ const RickAndMortyPage = (props) => {
                           variant="h6"
                           color="textPrimary"
                           component="p"
+                          style={{ textTransform: "capitalize" }}
+                          align="center"
                         >
                           {name}, {species}
                         </Typography>

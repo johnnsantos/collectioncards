@@ -114,9 +114,10 @@ const PokemonsPage = (props) => {
                       />
                       <CardContent>
                         <Typography
-                          variant="h5"
+                          variant="h6"
                           color="textPrimary"
                           component="p"
+                          style={{ textTransform: "capitalize" }}
                           align="center"
                         >
                           {name}
@@ -162,9 +163,10 @@ const PokemonsPage = (props) => {
                     />
                     <CardContent>
                       <Typography
-                        variant="h5"
+                        variant="h6"
                         color="textPrimary"
                         component="p"
+                        style={{ textTransform: "capitalize" }}
                         align="center"
                       >
                         {name}
