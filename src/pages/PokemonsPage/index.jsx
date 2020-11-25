@@ -1,20 +1,55 @@
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { StyledBox } from "./styles.js";
+import { StyledBox } from "./styles";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardHeader,
+  IconButton,
+  Avatar,
+  Grid,
+} from "@material-ui/core";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import ButtonsPagination from "../../components/ButtonsPagination";
 import SearchBar from "../../components/SearchBar";
 
-const PokemonsPage = () => {
-  const [data, setData] = useState([]);
-  const [images, setImages] = useState([]);
+const PokemonsPage = (props) => {
+  const [characterAPI, setCharacterAPI] = useState({
+    characterList: [],
+    filteredCharacters: [],
+    urls: [],
+  });
 
-  // useEffect(() => {
-  //   axios.get("https://pokeapi.co/api/v2/pokemon?limit=150").then((res) => {
-  //     setData(res.data.results);
-  //     console.log(data);
-  //   });
-  // });
+  const { characterList, filteredCharacters } = characterAPI;
+
+  const [page, setPage] = useState({
+    start: 0,
+    range: 20,
+  });
+  const { start, range } = page;
+
+  useEffect(() => {
+    axios.get("https://pokeapi.co/api/v2/pokemon?limit=150").then((res) => {
+      setCharacterAPI({
+        characterList: [...characterList, ...res.data.results],
+      });
+    });
+  }, [setCharacterAPI]);
+
+  const filterCharacter = (e) => {
+    let search = e.target.value;
+    let setCharacterFilter = characterList.filter((character) =>
+      character.name.toLowerCase().includes(search)
+    );
+    setCharacterAPI({
+      ...characterAPI,
+      filteredCharacters: setCharacterFilter,
+    });
+  };
 
   return (
     <motion.div
@@ -23,9 +58,134 @@ const PokemonsPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
-      <SearchBar />
-      <ButtonsPagination />
-      <StyledBox></StyledBox>
+      <SearchBar function={(e) => filterCharacter(e)} />
+      <ButtonsPagination
+        prev={() => {
+          if (start > 0) {
+            setPage({
+              start: start - 20,
+              range: range - 20,
+            });
+          }
+        }}
+        next={() => {
+          if (range <= 150) {
+            setPage({
+              start: start + 20,
+              range: range + 20,
+            });
+          }
+        }}
+      />
+      <StyledBox>
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="center"
+          spacing={2}
+        >
+          {filteredCharacters
+            ? filteredCharacters
+                .slice(start, range)
+                .map(({ name, url }, index) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                    <Card key={index}>
+                      <CardHeader
+                        avatar={
+                          <Avatar
+                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                              url.split("/")[6]
+                            }.png`}
+                          ></Avatar>
+                        }
+                        title={name}
+                      />
+                      <CardMedia
+                        style={{
+                          margin: "auto",
+                          paddingLeft: "50%",
+                          paddingTop: "50%",
+                          width: "50px",
+                        }}
+                        image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                          url.split("/")[6]
+                        }.png`}
+                      />
+                      <CardContent>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {name}
+                        </Typography>
+                      </CardContent>
+                      <CardActions disableSpacing>
+                        <IconButton onClick={() => {}}>
+                          <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            component="p"
+                          >
+                            Favoritar
+                          </Typography>
+                          <FavoriteIcon />
+                        </IconButton>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))
+            : characterList.slice(start, range).map(({ name, url }, index) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                  <Card key={index}>
+                    <CardHeader
+                      avatar={
+                        <Avatar
+                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                            url.split("/")[6]
+                          }.png`}
+                        ></Avatar>
+                      }
+                      title={name}
+                    />
+                    <CardMedia
+                      style={{
+                        margin: "auto",
+                        paddingLeft: "50%",
+                        paddingTop: "50%",
+                        width: "50px",
+                      }}
+                      image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                        url.split("/")[6]
+                      }.png`}
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        {name}
+                      </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                      <IconButton onClick={() => {}}>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          Favoritar
+                        </Typography>
+                        <FavoriteIcon />
+                      </IconButton>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+        </Grid>
+      </StyledBox>
     </motion.div>
   );
 };
