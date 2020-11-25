@@ -115,8 +115,8 @@ const RickAndMortyPage = (props) => {
                       />
                       <CardContent>
                         <Typography
-                          variant="body2"
-                          color="textSecondary"
+                          variant="h6"
+                          color="textPrimary"
                           component="p"
                         >
                           {name}, {species}
@@ -124,15 +124,15 @@ const RickAndMortyPage = (props) => {
                       </CardContent>
                       <CardActions disableSpacing>
                         <IconButton onClick={() => {}}>
-                          <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                          >
-                            Favoritar
-                          </Typography>
                           <FavoriteIcon />
                         </IconButton>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          Favoritar
+                        </Typography>
                       </CardActions>
                     </Card>
                   </Grid>
@@ -161,8 +161,8 @@ const RickAndMortyPage = (props) => {
                       />
                       <CardContent>
                         <Typography
-                          variant="body2"
-                          color="textSecondary"
+                          variant="h6"
+                          color="textPrimary"
                           component="p"
                         >
                           {name}, {species}
@@ -170,15 +170,15 @@ const RickAndMortyPage = (props) => {
                       </CardContent>
                       <CardActions disableSpacing>
                         <IconButton onClick={() => {}}>
-                          <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                          >
-                            Favoritar
-                          </Typography>
                           <FavoriteIcon />
                         </IconButton>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          Favoritar
+                        </Typography>
                       </CardActions>
                     </Card>
                   </Grid>

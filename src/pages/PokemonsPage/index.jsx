@@ -21,7 +21,6 @@ const PokemonsPage = (props) => {
   const [characterAPI, setCharacterAPI] = useState({
     characterList: [],
     filteredCharacters: [],
-    urls: [],
   });
 
   const { characterList, filteredCharacters } = characterAPI;
@@ -104,9 +103,8 @@ const PokemonsPage = (props) => {
                       <CardMedia
                         style={{
                           margin: "auto",
-                          paddingLeft: "50%",
-                          paddingTop: "50%",
-                          width: "50px",
+                          width: "150px",
+                          height: "150px",
                         }}
                         image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                           url.split("/")[6]
@@ -114,24 +112,25 @@ const PokemonsPage = (props) => {
                       />
                       <CardContent>
                         <Typography
-                          variant="body2"
-                          color="textSecondary"
+                          variant="h5"
+                          color="textPrimary"
                           component="p"
+                          align="center"
                         >
                           {name}
                         </Typography>
                       </CardContent>
                       <CardActions disableSpacing>
                         <IconButton onClick={() => {}}>
-                          <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                          >
-                            Favoritar
-                          </Typography>
                           <FavoriteIcon />
                         </IconButton>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          Favoritar
+                        </Typography>
                       </CardActions>
                     </Card>
                   </Grid>
@@ -152,9 +151,8 @@ const PokemonsPage = (props) => {
                     <CardMedia
                       style={{
                         margin: "auto",
-                        paddingLeft: "50%",
-                        paddingTop: "50%",
-                        width: "50px",
+                        width: "150px",
+                        height: "150px",
                       }}
                       image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                         url.split("/")[6]
@@ -162,24 +160,25 @@ const PokemonsPage = (props) => {
                     />
                     <CardContent>
                       <Typography
-                        variant="body2"
-                        color="textSecondary"
+                        variant="h5"
+                        color="textPrimary"
                         component="p"
+                        align="center"
                       >
                         {name}
                       </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
                       <IconButton onClick={() => {}}>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          component="p"
-                        >
-                          Favoritar
-                        </Typography>
                         <FavoriteIcon />
                       </IconButton>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        Favoritar
+                      </Typography>
                     </CardActions>
                   </Card>
                 </Grid>
