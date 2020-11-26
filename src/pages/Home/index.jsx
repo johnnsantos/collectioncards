@@ -22,7 +22,7 @@ const Home = () => {
         >
           Rick e Morty + Pokemon
         </h1>
-        <Carousel autoplay>
+        <Carousel autoplay style={{ backgroundColor: "#b9a599" }}>
           <div>
             <img
               style={contentStyle}

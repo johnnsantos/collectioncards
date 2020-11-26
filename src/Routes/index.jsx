@@ -4,17 +4,20 @@ import Menu from "../components/Menu";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Favorites from "../pages/Favorites";
 import Characters from "../pages/Characters";
+import { AnimatePresence } from "framer-motion";
 
 const Routes = () => {
   return (
     <>
       <CssBaseline />
       <Menu />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/:id" component={Characters}></Route>
-        <Route exact path="/favorites/:type" component={Favorites}></Route>
-      </Switch>
+      <AnimatePresence>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/:id" component={Characters}></Route>
+          <Route exact path="/favorites/:id" component={Favorites}></Route>
+        </Switch>
+      </AnimatePresence>
     </>
   );
 };

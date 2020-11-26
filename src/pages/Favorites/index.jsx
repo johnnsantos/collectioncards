@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 const Favorites = () => {
-  const { type } = useParams();
+  const { id } = useParams();
 
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem("favorites"))
@@ -27,7 +27,7 @@ const Favorites = () => {
           justify="center"
           spacing={2}
         >
-          {type === "rickandmorty" ? (
+          {id === "rickandmorty" ? (
             <>
               {favorites !== null && favorites !== [] ? (
                 favorites

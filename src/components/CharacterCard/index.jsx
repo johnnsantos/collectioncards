@@ -14,6 +14,7 @@ import Loading from "../../loading.gif";
 import { message } from "antd";
 
 const CharacterCard = ({ data, setFavorites }) => {
+  const { pathname } = useLocation();
   const { name, image } = data;
   const id = data.id !== undefined ? data.id : "";
 
@@ -47,8 +48,6 @@ const CharacterCard = ({ data, setFavorites }) => {
     message.warning("Removido dos favoritos!");
   };
 
-  const location = useLocation();
-
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} key={id}>
       <StyledCard key={id}>
@@ -68,8 +67,8 @@ const CharacterCard = ({ data, setFavorites }) => {
             {name}
           </Typography>
         </CardContent>
-        {location.pathname === "/favorites/pokemon" ||
-        location.pathname === "/favorites/rickandmorty" ? (
+        {pathname === "/favorites/pokemon" ||
+        pathname === "/favorites/rickandmorty" ? (
           <CardActions disableSpacing>
             <StyledIcon onClick={removeFromFavorites}>
               <HighlightOffIcon />
