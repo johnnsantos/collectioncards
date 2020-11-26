@@ -63,8 +63,10 @@ const RickAndMortyPage = () => {
   };
 
   const updateLocalStorage = () => {
-    const data = JSON.stringify(favoritesrickmorty);
-    localStorage.setItem("favoritesrickmorty", data);
+    localStorage.setItem(
+      "favoritesrickmorty",
+      JSON.stringify(favoritesrickmorty)
+    );
   };
 
   useEffect(updateLocalStorage, [favoritesrickmorty]);

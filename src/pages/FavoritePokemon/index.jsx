@@ -1,8 +1,41 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { StyledBox } from "./styles";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardHeader,
+  IconButton,
+  Avatar,
+  Grid,
+} from "@material-ui/core";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import ButtonsPagination from "../../components/ButtonsPagination";
-import SearchBar from "../../components/SearchBar";
 
 const FavoritePokemon = () => {
+  const [characterList, setCharacterList] = useState({
+    favoritescharacters: [],
+  });
+
+  const retrieveLocalStorage = () => {
+    const data = JSON.parse(localStorage.getItem("favoritespokemon"));
+    setCharacterList({
+      ...characterList,
+      favoritescharacters: data,
+    });
+  };
+
+  useEffect(retrieveLocalStorage, []);
+
+  const [page, setPage] = useState({
+    start: 0,
+    range: 20,
+  });
+  const { start, range } = page;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -10,9 +43,86 @@ const FavoritePokemon = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
-      <SearchBar />
-      <ButtonsPagination />
-      <h1>Pokemons Favoritos</h1>
+      <ButtonsPagination
+        prev={() => {
+          if (start > 0) {
+            setPage({
+              start: start - 20,
+              range: range - 20,
+            });
+          }
+        }}
+        next={() => {
+          if (range <= 671) {
+            setPage({
+              start: start + 20,
+              range: range + 20,
+            });
+          }
+        }}
+      />
+      <StyledBox>
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="center"
+          spacing={2}
+        >
+          {characterList.favoritescharacters ? (
+            characterList.favoritescharacters
+              .slice(start, range)
+              .map((character, index) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                  <Card key={index}>
+                    <CardHeader
+                      avatar={<Avatar src={character.image}></Avatar>}
+                      title={character.name}
+                    />
+                    <CardMedia
+                      style={{
+                        height: "40px",
+                        margin: "auto",
+                        paddingLeft: "80%",
+                        paddingTop: "80%",
+                        width: "30px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      image={character.image}
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="h6"
+                        color="textPrimary"
+                        component="p"
+                        style={{ textTransform: "capitalize" }}
+                        align="center"
+                      >
+                        {character.name}, {character.species}
+                      </Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                      <IconButton>
+                        <FavoriteIcon />
+                      </IconButton>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        Favoritar
+                      </Typography>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))
+          ) : (
+            <h1>Sem favoritos</h1>
+          )}
+        </Grid>
+      </StyledBox>
     </motion.div>
   );
 };

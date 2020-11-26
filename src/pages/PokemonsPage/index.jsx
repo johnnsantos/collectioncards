@@ -54,9 +54,16 @@ const PokemonsPage = (props) => {
 
   const [favoritesPokemon, setFavoritesPokemon] = useState([]);
 
-  useEffect(() => {
-    localStorage.setItem("favoritesPokemon", favoritesPokemon);
-  }, [favoritesPokemon]);
+  const sendFavoriteToState = (character) => {
+    setFavoritesPokemon([...favoritesPokemon, character]);
+  };
+
+  const updateLocalStorage = () => {
+    const data = JSON.stringify(favoritesPokemon);
+    localStorage.setItem("favoritesPokemon", data);
+  };
+
+  useEffect(updateLocalStorage, [favoritesPokemon]);
 
   return (
     <motion.div
@@ -131,14 +138,9 @@ const PokemonsPage = (props) => {
                       </CardContent>
                       <CardActions disableSpacing>
                         <IconButton
-                          onClick={() => {
-                            if (!favoritesPokemon.includes(url.split("/")[6])) {
-                              setFavoritesPokemon([
-                                ...favoritesPokemon,
-                                url.split("/")[6],
-                              ]);
-                            }
-                          }}
+                          onClick={(character) =>
+                            sendFavoriteToState(character)
+                          }
                         >
                           <FavoriteIcon />
                         </IconButton>
@@ -153,18 +155,18 @@ const PokemonsPage = (props) => {
                     </Card>
                   </Grid>
                 ))
-            : characterList.slice(start, range).map(({ name, url }, index) => (
+            : characterList.slice(start, range).map((character, index) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                   <Card key={index}>
                     <CardHeader
                       avatar={
                         <Avatar
                           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                            url.split("/")[6]
+                            character.url.split("/")[6]
                           }.png`}
                         ></Avatar>
                       }
-                      title={name}
+                      title={character.name}
                     />
                     <CardMedia
                       style={{
@@ -173,7 +175,7 @@ const PokemonsPage = (props) => {
                         height: "150px",
                       }}
                       image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                        url.split("/")[6]
+                        character.url.split("/")[6]
                       }.png`}
                     />
                     <CardContent>
@@ -184,19 +186,12 @@ const PokemonsPage = (props) => {
                         style={{ textTransform: "capitalize" }}
                         align="center"
                       >
-                        {name}
+                        {character.name}
                       </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
                       <IconButton
-                        onClick={() => {
-                          if (!favoritesPokemon.includes(url.split("/")[6])) {
-                            setFavoritesPokemon([
-                              ...favoritesPokemon,
-                              url.split("/")[6],
-                            ]);
-                          }
-                        }}
+                        onClick={(character) => sendFavoriteToState(character)}
                       >
                         <FavoriteIcon />
                       </IconButton>

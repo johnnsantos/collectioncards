@@ -16,19 +16,12 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ButtonsPagination from "../../components/ButtonsPagination";
 
 const FavoriteRickAndMorty = () => {
-  const [characterList, setCharacterList] = useState({
-    favoritescharacters: [],
-  });
+  const [characterList, setCharacterList] = useState([]);
 
-  const retrieveLocalStorage = () => {
+  useEffect(() => {
     const data = JSON.parse(localStorage.getItem("favoritesrickmorty"));
-    setCharacterList({
-      ...characterList,
-      favoritescharacters: data,
-    });
-  };
-
-  useEffect(retrieveLocalStorage, []);
+    setCharacterList([...characterList, data]);
+  }, []);
 
   const [page, setPage] = useState({
     start: 0,
@@ -71,55 +64,53 @@ const FavoriteRickAndMorty = () => {
           justify="center"
           spacing={2}
         >
-          {characterList.favoritescharacters ? (
-            characterList.favoritescharacters
-              .slice(start, range)
-              .map((character, index) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                  <Card key={index}>
-                    <CardHeader
-                      avatar={<Avatar src={character.image}></Avatar>}
-                      title={character.name}
-                    />
-                    <CardMedia
-                      style={{
-                        height: "40px",
-                        margin: "auto",
-                        paddingLeft: "80%",
-                        paddingTop: "80%",
-                        width: "30px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                      image={character.image}
-                    />
-                    <CardContent>
-                      <Typography
-                        variant="h6"
-                        color="textPrimary"
-                        component="p"
-                        style={{ textTransform: "capitalize" }}
-                        align="center"
-                      >
-                        {character.name}, {character.species}
-                      </Typography>
-                    </CardContent>
-                    <CardActions disableSpacing>
-                      <IconButton>
-                        <FavoriteIcon />
-                      </IconButton>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        Favoritar
-                      </Typography>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))
+          {characterList ? (
+            characterList.slice(start, range).map((character, index) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <Card key={index}>
+                  <CardHeader
+                    avatar={<Avatar src={character.image}></Avatar>}
+                    title={character.name}
+                  />
+                  <CardMedia
+                    style={{
+                      height: "40px",
+                      margin: "auto",
+                      paddingLeft: "80%",
+                      paddingTop: "80%",
+                      width: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    image={character.image}
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      color="textPrimary"
+                      component="p"
+                      style={{ textTransform: "capitalize" }}
+                      align="center"
+                    >
+                      {character.name}, {character.species}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <IconButton>
+                      <FavoriteIcon />
+                    </IconButton>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      Favoritar
+                    </Typography>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))
           ) : (
             <h1>Sem favoritos</h1>
           )}
