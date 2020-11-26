@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import { Box } from "@material-ui/core";
+import { Pagination } from "@material-ui/lab";
 
 export const StyledBox = styled(Box)`
+  margin: 5vh auto;
   width: 90%;
-  margin: 3vh auto;
+`;
+
+export const StyledPagination = styled(Pagination)`
+  margin: 5vh auto 0;
   display: flex;
-  flex-flow: row nowrap;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 `;

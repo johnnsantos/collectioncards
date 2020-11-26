@@ -11,4 +11,8 @@ export const StyledAppBar = styled(AppBar)`
 export const StyledTab = styled(Tab)`
   margin: 0 5px 0;
   text-transform: capitalize;
+
+  &:hover {
+    background-color: #a17150;
+  }
 `;

@@ -1,0 +1,106 @@
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardHeader,
+  IconButton,
+  Avatar,
+  Grid,
+} from "@material-ui/core";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import { useLocation } from "react-router-dom";
+
+const CharacterCard = ({ data, setFavorites }) => {
+  const { name, image } = data;
+  const id = data.id !== undefined ? data.id : "";
+
+  const getFavorites = () => {
+    const favorites =
+      window.localStorage.getItem("favorites") !== null
+        ? JSON.parse(window.localStorage.getItem("favorites"))
+        : [];
+    return favorites;
+  };
+
+  const handleFavorites = () => {
+    if (
+      getFavorites().find((favorite) => favorite.name === name) === undefined
+    ) {
+      const favorites = [
+        ...getFavorites(),
+        { id: id, name: name, image: image },
+      ];
+      window.localStorage.removeItem("favorites");
+      window.localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+  };
+
+  const handleRemoveFavorites = () => {
+    const favorites = getFavorites();
+    window.localStorage.removeItem("favorites");
+    window.localStorage.setItem(
+      "favorites",
+      JSON.stringify(favorites?.filter((favorite) => favorite.name !== name))
+    );
+    setFavorites(JSON.parse(window.localStorage.getItem("favorites")));
+  };
+
+  const location = useLocation();
+
+  return (
+    <Grid item xs={12} sm={6} md={4} lg={3} key={id}>
+      <Card key={id}>
+        <CardHeader avatar={<Avatar src={image}></Avatar>} title={name} />
+        <CardMedia
+          style={{
+            height: "40px",
+            margin: "auto",
+            paddingLeft: "80%",
+            paddingTop: "80%",
+            width: "30px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          image={image}
+        />
+        <CardContent>
+          <Typography
+            variant="h6"
+            color="textPrimary"
+            component="p"
+            style={{ textTransform: "capitalize" }}
+            align="center"
+          >
+            {name}
+          </Typography>
+        </CardContent>
+        {location.pathname === "/favorites/pokemon" ||
+        location.pathname === "/favorites/rickandmorty" ? (
+          <CardActions disableSpacing>
+            <IconButton onClick={handleRemoveFavorites}>
+              <HighlightOffIcon />
+            </IconButton>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Excluir dos Favoritos
+            </Typography>
+          </CardActions>
+        ) : (
+          <CardActions disableSpacing>
+            <IconButton onClick={handleFavorites}>
+              <FavoriteIcon />
+            </IconButton>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Favoritar
+            </Typography>
+          </CardActions>
+        )}
+      </Card>
+    </Grid>
+  );
+};
+
+export default CharacterCard;
