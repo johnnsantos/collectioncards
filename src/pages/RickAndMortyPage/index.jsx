@@ -137,7 +137,9 @@ const RickAndMortyPage = () => {
                     </CardContent>
                     <CardActions disableSpacing>
                       <IconButton
-                        onClick={() => sendFavoriteToState(character)}
+                        onClick={() => {
+                          sendFavoriteToState(character);
+                        }}
                       >
                         <FavoriteIcon />
                       </IconButton>
@@ -185,7 +187,9 @@ const RickAndMortyPage = () => {
                     </CardContent>
                     <CardActions disableSpacing>
                       <IconButton
-                        onClick={() => sendFavoriteToState(character)}
+                        onClick={() => {
+                          sendFavoriteToState(character);
+                        }}
                       >
                         <FavoriteIcon />
                       </IconButton>
