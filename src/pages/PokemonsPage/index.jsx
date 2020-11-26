@@ -52,6 +52,12 @@ const PokemonsPage = (props) => {
     });
   };
 
+  const [favoritesPokemon, setFavoritesPokemon] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("favoritesPokemon", favoritesPokemon);
+  }, [favoritesPokemon]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -124,7 +130,16 @@ const PokemonsPage = (props) => {
                         </Typography>
                       </CardContent>
                       <CardActions disableSpacing>
-                        <IconButton>
+                        <IconButton
+                          onClick={() => {
+                            if (!favoritesPokemon.includes(url.split("/")[6])) {
+                              setFavoritesPokemon([
+                                ...favoritesPokemon,
+                                url.split("/")[6],
+                              ]);
+                            }
+                          }}
+                        >
                           <FavoriteIcon />
                         </IconButton>
                         <Typography
@@ -173,7 +188,16 @@ const PokemonsPage = (props) => {
                       </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
-                      <IconButton>
+                      <IconButton
+                        onClick={() => {
+                          if (!favoritesPokemon.includes(url.split("/")[6])) {
+                            setFavoritesPokemon([
+                              ...favoritesPokemon,
+                              url.split("/")[6],
+                            ]);
+                          }
+                        }}
+                      >
                         <FavoriteIcon />
                       </IconButton>
                       <Typography
