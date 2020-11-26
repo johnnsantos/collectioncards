@@ -5,10 +5,10 @@ import {
   CardMedia,
   Typography,
   CardHeader,
-  IconButton,
   Avatar,
   Grid,
 } from "@material-ui/core";
+import { StyledIcon } from "./styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { useLocation } from "react-router-dom";
@@ -81,18 +81,18 @@ const CharacterCard = ({ data, setFavorites }) => {
         {location.pathname === "/favorites/pokemon" ||
         location.pathname === "/favorites/rickandmorty" ? (
           <CardActions disableSpacing>
-            <IconButton onClick={handleRemoveFavorites}>
+            <StyledIcon onClick={handleRemoveFavorites}>
               <HighlightOffIcon />
-            </IconButton>
+            </StyledIcon>
             <Typography variant="body2" color="textSecondary" component="p">
               Excluir dos Favoritos
             </Typography>
           </CardActions>
         ) : (
           <CardActions disableSpacing>
-            <IconButton onClick={handleFavorites}>
+            <StyledIcon onClick={handleFavorites}>
               <FavoriteIcon />
-            </IconButton>
+            </StyledIcon>
             <Typography variant="body2" color="textSecondary" component="p">
               Favoritar
             </Typography>

@@ -47,7 +47,7 @@ const Menu = () => {
           />
           <StyledTab
             icon={<StarIcon />}
-            label="Rick e Morty | Favoritos"
+            label="Rick Morty | Favoritos"
             component={Link}
             to="/favorites/rickandmorty"
             value="/favorites/rickandmorty"

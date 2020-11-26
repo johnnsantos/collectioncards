@@ -12,7 +12,6 @@ const Characters = ({ setFavorites, favorites }) => {
   const location = useLocation();
 
   const [RickAndPokemonCharacters, setCharactersRickAndMorty] = useState([]);
-
   const [page, setPage] = useState(1);
   const [numberPages, setNumberPages] = useState();
 
