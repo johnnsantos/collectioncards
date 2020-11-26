@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { motion } from "framer-motion";
 import { useLocation, useParams } from "react-router-dom";
 import { Request } from "../../Request";
@@ -9,35 +10,34 @@ import { StyledBox, StyledPagination } from "./styles";
 const Characters = ({ setFavorites, favorites }) => {
   const { id } = useParams();
   const location = useLocation();
-
   const [characterList, setCharacterList] = useState([]);
-  const [actualPage, setAtcualPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState();
 
   useEffect(() => {
-    const setPageNumber = (data) => {
-      id === "rickandmorty" && setTotalPages(data.info?.totalPages);
-      id === "pokemon" && setTotalPages(Math.ceil(data.count / 20));
-    };
-    setPageNumber(Characters);
-  }, [characterList, id]);
-
-  useEffect(() => {
-    const getCharacters = async () => {
+    const getCharacterList = async () => {
       const URL =
         (id === "rickandmorty" &&
-          `https://rickandmortyapi.com/api/character/?page=${actualPage}`) ||
+          `https://rickandmortyapi.com/api/character/?page=${page}`) ||
         (id === "pokemon" &&
-          `https://pokeapi.co/api/v2/pokemon?offset=${actualPage}&limit=20`);
+          `https://pokeapi.co/api/v2/pokemon?offset=${page}&limit=20`);
       if (id === "rickandmorty" || id === "pokemon") {
         setCharacterList(await Request(URL));
       }
     };
-    getCharacters();
-  }, [location, actualPage, id]);
+    getCharacterList();
+  }, [location, page]);
+
+  useEffect(() => {
+    const getTotalPages = (data) => {
+      id === "rickandmorty" && setTotalPages(data.info?.pages);
+      id === "pokemon" && setTotalPages(Math.ceil(data.count / 20));
+    };
+    getTotalPages(characterList);
+  }, [characterList]);
 
   const handleChange = (e, value) => {
-    setAtcualPage(value);
+    setPage(value);
   };
 
   return (
@@ -79,12 +79,12 @@ const Characters = ({ setFavorites, favorites }) => {
               />
             ))}
         </Grid>
-        <StyledPagination
-          count={totalPages}
-          page={actualPage}
-          onChange={handleChange}
-        />
       </StyledBox>
+      <StyledPagination
+        count={totalPages}
+        page={page}
+        onChange={handleChange}
+      />
     </motion.div>
   );
 };

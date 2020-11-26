@@ -8,7 +8,9 @@ export const StyledBox = styled(Box)`
 `;
 
 export const StyledPagination = styled(Pagination)`
-  margin: 5vh auto 0;
+  margin: 5vh auto;
+  padding-bottom: 5vh;
+  height: 5vh;
   display: flex;
   align-items: center;
   justify-content: center;

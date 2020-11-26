@@ -10,6 +10,8 @@ import { StyledIcon, StyledCard, StyledCardMedia } from "./styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { useLocation } from "react-router-dom";
+import Loading from "../../loading.gif";
+import { message } from "antd";
 
 const CharacterCard = ({ data, setFavorites }) => {
   const { name, image } = data;
@@ -17,33 +19,32 @@ const CharacterCard = ({ data, setFavorites }) => {
 
   const getFavorites = () => {
     const favorites =
-      window.localStorage.getItem("favorites") !== null
-        ? JSON.parse(window.localStorage.getItem("favorites"))
+      localStorage.getItem("favorites") !== null
+        ? JSON.parse(localStorage.getItem("favorites"))
         : [];
     return favorites;
   };
 
-  const handleFavorites = () => {
+  const addToFavorites = () => {
     if (
       getFavorites().find((favorite) => favorite.name === name) === undefined
     ) {
-      const favorites = [
-        ...getFavorites(),
-        { id: id, name: name, image: image },
-      ];
-      window.localStorage.removeItem("favorites");
-      window.localStorage.setItem("favorites", JSON.stringify(favorites));
+      message.success("Adicionado aos favoritos!");
+      const favorites = [...getFavorites(), { id, name, image }];
+      localStorage.removeItem("favorites");
+      localStorage.setItem("favorites", JSON.stringify(favorites));
     }
   };
 
-  const handleRemoveFavorites = () => {
+  const removeFromFavorites = () => {
     const favorites = getFavorites();
-    window.localStorage.removeItem("favorites");
-    window.localStorage.setItem(
+    localStorage.removeItem("favorites");
+    localStorage.setItem(
       "favorites",
       JSON.stringify(favorites?.filter((favorite) => favorite.name !== name))
     );
-    setFavorites(JSON.parse(window.localStorage.getItem("favorites")));
+    setFavorites(JSON.parse(localStorage.getItem("favorites")));
+    message.warning("Removido dos favoritos!");
   };
 
   const location = useLocation();
@@ -51,8 +52,11 @@ const CharacterCard = ({ data, setFavorites }) => {
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} key={id}>
       <StyledCard key={id}>
-        <CardHeader avatar={<Avatar src={image}></Avatar>} title={name} />
-        <StyledCardMedia image={image} />
+        <CardHeader
+          avatar={<Avatar src={image ? image : Loading}></Avatar>}
+          title={name}
+        />
+        <StyledCardMedia image={image ? image : Loading} />
         <CardContent>
           <Typography
             variant="h6"
@@ -67,7 +71,7 @@ const CharacterCard = ({ data, setFavorites }) => {
         {location.pathname === "/favorites/pokemon" ||
         location.pathname === "/favorites/rickandmorty" ? (
           <CardActions disableSpacing>
-            <StyledIcon onClick={handleRemoveFavorites}>
+            <StyledIcon onClick={removeFromFavorites}>
               <HighlightOffIcon />
             </StyledIcon>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -76,7 +80,7 @@ const CharacterCard = ({ data, setFavorites }) => {
           </CardActions>
         ) : (
           <CardActions disableSpacing>
-            <StyledIcon onClick={handleFavorites}>
+            <StyledIcon onClick={addToFavorites}>
               <FavoriteIcon />
             </StyledIcon>
             <Typography variant="body2" color="textSecondary" component="p">

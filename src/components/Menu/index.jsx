@@ -7,13 +7,12 @@ import { CgPokemon } from "react-icons/cg";
 import { GiMaterialsScience } from "react-icons/gi";
 
 const Menu = () => {
-  const location = useLocation();
-
+  const { pathname } = useLocation();
   return (
     <Box mb={5}>
       <StyledAppBar position="static">
         <Tabs
-          value={location.pathname}
+          value={pathname}
           variant="fullWidth"
           orientation={window.innerWidth < 600 ? "vertical" : "horizontal"}
         >

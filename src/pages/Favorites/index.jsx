@@ -9,7 +9,7 @@ const Favorites = () => {
   const { type } = useParams();
 
   const [favorites, setFavorites] = useState(
-    JSON.parse(window.localStorage.getItem("favorites"))
+    JSON.parse(localStorage.getItem("favorites"))
   );
 
   return (

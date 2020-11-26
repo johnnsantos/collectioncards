@@ -1,62 +1,14 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-  CarouselCaption,
-} from "reactstrap";
 import { StyledDiv } from "./styles";
+import { Carousel } from "antd";
 
-const items = [
-  {
-    src: "http://static.minitokyo.net/downloads/18/11/743068.jpg",
-  },
-  {
-    src: "https://images6.alphacoders.com/909/thumb-1920-909641.png",
-  },
-];
+const contentStyle = {
+  width: "100%",
+  maxWidth: "1920px",
+  margin: "0 auto 5vh",
+};
 
 const Home = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [animating, setAnimating] = useState(false);
-
-  const next = () => {
-    if (animating) return;
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
-    setActiveIndex(nextIndex);
-  };
-
-  const previous = () => {
-    if (animating) return;
-    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
-    setActiveIndex(nextIndex);
-  };
-
-  const goToIndex = (newIndex) => {
-    if (animating) return;
-    setActiveIndex(newIndex);
-  };
-
-  const slides = items.map((item) => {
-    return (
-      <CarouselItem
-        onExiting={() => setAnimating(true)}
-        onExited={() => setAnimating(false)}
-        key={item.src}
-      >
-        <img
-          src={item.src}
-          alt={item.src}
-          style={{ width: "90vw", borderRadius: "100px" }}
-        />
-        <CarouselCaption />
-      </CarouselItem>
-    );
-  });
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -65,23 +17,26 @@ const Home = () => {
       transition={{ duration: 0.7 }}
     >
       <StyledDiv>
-        <Carousel activeIndex={activeIndex} next={next} previous={previous}>
-          <CarouselIndicators
-            items={items}
-            activeIndex={activeIndex}
-            onClickHandler={goToIndex}
-          />
-          {slides}
-          <CarouselControl
-            direction="prev"
-            directionText="Previous"
-            onClickHandler={previous}
-          />
-          <CarouselControl
-            direction="next"
-            directionText="Next"
-            onClickHandler={next}
-          />
+        <h1
+          style={{ textAlign: "center", fontWeight: "bold", color: "#9b4c1e" }}
+        >
+          Rick e Morty + Pokemon
+        </h1>
+        <Carousel autoplay>
+          <div>
+            <img
+              style={contentStyle}
+              src="https://i.pinimg.com/originals/e9/7c/c3/e97cc329984a848cab048cad41cea08e.jpg"
+              alt="Rick and Morty"
+            />
+          </div>
+          <div>
+            <img
+              style={contentStyle}
+              src="https://uhdwallpapers.org/uploads/converted/19/05/11/pokemon-detective-pikachu-1920x1080_898558-mm-90.jpg"
+              alt="Pokemon"
+            />
+          </div>
         </Carousel>
       </StyledDiv>
     </motion.div>
