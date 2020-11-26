@@ -56,11 +56,18 @@ const RickAndMortyPage = () => {
     });
   };
 
-  const [favoritesRickMorty, setFavoritesRickMorty] = useState([]);
+  const [favoritesrickmorty, setFavoritesRickMorty] = useState([]);
 
-  useEffect(() => {
-    localStorage.setItem("favoritesrickmorty", favoritesRickMorty);
-  }, [favoritesRickMorty]);
+  const sendFavoriteToState = (character) => {
+    setFavoritesRickMorty([...favoritesrickmorty, character]);
+  };
+
+  const updateLocalStorage = () => {
+    const data = JSON.stringify(favoritesrickmorty);
+    localStorage.setItem("favoritesrickmorty", data);
+  };
+
+  useEffect(updateLocalStorage, [favoritesrickmorty]);
 
   return (
     <motion.div
@@ -130,14 +137,7 @@ const RickAndMortyPage = () => {
                     </CardContent>
                     <CardActions disableSpacing>
                       <IconButton
-                        onClick={() => {
-                          if (!favoritesRickMorty.includes(character.id)) {
-                            setFavoritesRickMorty([
-                              ...favoritesRickMorty,
-                              character.id,
-                            ]);
-                          }
-                        }}
+                        onClick={() => sendFavoriteToState(character)}
                       >
                         <FavoriteIcon />
                       </IconButton>
@@ -185,14 +185,7 @@ const RickAndMortyPage = () => {
                     </CardContent>
                     <CardActions disableSpacing>
                       <IconButton
-                        onClick={() => {
-                          if (!favoritesRickMorty.includes(character.id)) {
-                            setFavoritesRickMorty([
-                              ...favoritesRickMorty,
-                              character.id,
-                            ]);
-                          }
-                        }}
+                        onClick={() => sendFavoriteToState(character)}
                       >
                         <FavoriteIcon />
                       </IconButton>
