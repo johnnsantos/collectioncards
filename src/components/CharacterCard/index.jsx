@@ -1,14 +1,12 @@
 import {
-  Card,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
   CardHeader,
   Avatar,
   Grid,
 } from "@material-ui/core";
-import { StyledIcon } from "./styles";
+import { StyledIcon, StyledCard, StyledCardMedia } from "./styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { useLocation } from "react-router-dom";
@@ -52,21 +50,9 @@ const CharacterCard = ({ data, setFavorites }) => {
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} key={id}>
-      <Card key={id}>
+      <StyledCard key={id}>
         <CardHeader avatar={<Avatar src={image}></Avatar>} title={name} />
-        <CardMedia
-          style={{
-            height: "40px",
-            margin: "auto",
-            paddingLeft: "80%",
-            paddingTop: "80%",
-            width: "30px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          image={image}
-        />
+        <StyledCardMedia image={image} />
         <CardContent>
           <Typography
             variant="h6"
@@ -98,7 +84,7 @@ const CharacterCard = ({ data, setFavorites }) => {
             </Typography>
           </CardActions>
         )}
-      </Card>
+      </StyledCard>
     </Grid>
   );
 };
