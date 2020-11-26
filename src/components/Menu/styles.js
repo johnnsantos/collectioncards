@@ -6,6 +6,11 @@ export const StyledAppBar = styled(AppBar)`
   svg {
     font-size: 1.5rem;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 export const StyledTab = styled(Tab)`
