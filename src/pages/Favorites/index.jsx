@@ -29,7 +29,7 @@ const Favorites = () => {
         >
           {type === "rickandmorty" ? (
             <>
-              {favorites !== null &&
+              {favorites !== null && favorites !== [] ? (
                 favorites
                   .filter((favorite) => favorite.id !== "")
                   .map((favorite, index) => (
@@ -38,11 +38,14 @@ const Favorites = () => {
                       key={index}
                       data={favorite}
                     />
-                  ))}
+                  ))
+              ) : (
+                <h3>Sem favoritos ainda.</h3>
+              )}
             </>
           ) : (
             <>
-              {favorites !== null &&
+              {favorites !== null && favorites !== [] ? (
                 favorites
                   .filter((favorite) => favorite.id === "")
                   .map((favorite, index) => (
@@ -51,7 +54,10 @@ const Favorites = () => {
                       key={index}
                       data={favorite}
                     />
-                  ))}
+                  ))
+              ) : (
+                <h3>Sem favoritos ainda.</h3>
+              )}
             </>
           )}
         </Grid>

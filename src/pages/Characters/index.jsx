@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { motion } from "framer-motion";
 import { useLocation, useParams } from "react-router-dom";
 import { Request } from "../../Request";
@@ -11,44 +10,34 @@ const Characters = ({ setFavorites, favorites }) => {
   const { id } = useParams();
   const location = useLocation();
 
-  const [RickAndPokemonCharacters, setCharactersRickAndMorty] = useState([]);
-  const [page, setPage] = useState(1);
-  const [numberPages, setNumberPages] = useState();
-
-  const defineNumberpages = (data) => {
-    id === "rickandmorty" && setNumberPages(data.info?.pages);
-    id === "pokemon" && setNumberPages(Math.ceil(data.count / 20));
-  };
-
-  const handleChange = (_e, value) => {
-    setPage(value);
-  };
-
-  const LoadCharacters = async () => {
-    const URL =
-      (id === "rickandmorty" &&
-        `https://rickandmortyapi.com/api/character/?page=${page}`) ||
-      (id === "pokemon" &&
-        `https://pokeapi.co/api/v2/pokemon?offset=${page}&limit=20`);
-    if (id === "rickandmorty" || id === "pokemon") {
-      setCharactersRickAndMorty(await Request(URL));
-    }
-  };
+  const [characterList, setCharacterList] = useState([]);
+  const [actualPage, setAtcualPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    LoadCharacters();
-  }, [location, page]);
+    const setPageNumber = (data) => {
+      id === "rickandmorty" && setTotalPages(data.info?.totalPages);
+      id === "pokemon" && setTotalPages(Math.ceil(data.count / 20));
+    };
+    setPageNumber(Characters);
+  }, [characterList, id]);
 
   useEffect(() => {
-    defineNumberpages(RickAndPokemonCharacters);
-  }, [RickAndPokemonCharacters]);
+    const getCharacters = async () => {
+      const URL =
+        (id === "rickandmorty" &&
+          `https://rickandmortyapi.com/api/character/?page=${actualPage}`) ||
+        (id === "pokemon" &&
+          `https://pokeapi.co/api/v2/pokemon?offset=${actualPage}&limit=20`);
+      if (id === "rickandmorty" || id === "pokemon") {
+        setCharacterList(await Request(URL));
+      }
+    };
+    getCharacters();
+  }, [location, actualPage, id]);
 
-  const { results } = RickAndPokemonCharacters;
-
-  const urlPoke = (poke) => {
-    const brokenUrl = poke.url.split("/");
-    const idPoke = brokenUrl[brokenUrl.length - 2];
-    return idPoke;
+  const handleChange = (e, value) => {
+    setAtcualPage(value);
   };
 
   return (
@@ -67,7 +56,7 @@ const Characters = ({ setFavorites, favorites }) => {
           spacing={2}
         >
           {id === "rickandmorty" &&
-            results?.map((character, index) => (
+            characterList.results?.map((character, index) => (
               <CharacterCard
                 setFavorites={setFavorites}
                 favorites={favorites}
@@ -76,23 +65,23 @@ const Characters = ({ setFavorites, favorites }) => {
               />
             ))}
           {id === "pokemon" &&
-            results?.map((character, index) => (
+            characterList.results?.map((character, index) => (
               <CharacterCard
                 setFavorites={setFavorites}
                 favorites={favorites}
                 key={index}
                 data={{
                   ...character,
-                  image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${urlPoke(
-                    character
-                  )}.png`,
+                  image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                    character.url.split("/")[6]
+                  }.png`,
                 }}
               />
             ))}
         </Grid>
         <StyledPagination
-          count={numberPages}
-          page={page}
+          count={totalPages}
+          page={actualPage}
           onChange={handleChange}
         />
       </StyledBox>
