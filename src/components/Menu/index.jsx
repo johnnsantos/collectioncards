@@ -13,7 +13,7 @@ const Menu = () => {
       <StyledAppBar position="static">
         <Tabs
           value={pathname}
-          variant="fullWidth"
+          variant="scrollable"
           orientation={window.innerWidth < 600 ? "vertical" : "horizontal"}
         >
           <StyledTab

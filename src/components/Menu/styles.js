@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { AppBar, Tab } from "@material-ui/core";
 
 export const StyledAppBar = styled(AppBar)`
+  text-align: center;
   margin: 0 auto;
   width: 90%;
   border-radius: 5px;

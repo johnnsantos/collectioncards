@@ -34,6 +34,7 @@ const Favorites = () => {
                   .filter((favorite) => favorite.id !== "")
                   .map((favorite, index) => (
                     <CharacterCard
+                      route={id}
                       setFavorites={setFavorites}
                       key={index}
                       data={favorite}
@@ -50,6 +51,7 @@ const Favorites = () => {
                   .filter((favorite) => favorite.id === "")
                   .map((favorite, index) => (
                     <CharacterCard
+                      route={id}
                       setFavorites={setFavorites}
                       key={index}
                       data={favorite}
