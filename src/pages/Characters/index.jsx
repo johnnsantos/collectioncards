@@ -28,7 +28,11 @@ const Characters = ({ setFavorites, favorites }) => {
       } else if (id === "pokemon") {
         setCharacterList(
           await GET(
-            `https://pokeapi.co/api/v2/pokemon/?offset=${page}&limit=20`
+            page === 1
+              ? `https://pokeapi.co/api/v2/pokemon/?offset=${page}&limit=20`
+              : `https://pokeapi.co/api/v2/pokemon/?offset=2${
+                  page - 1
+                }0&limit=20`
           )
         );
       }
