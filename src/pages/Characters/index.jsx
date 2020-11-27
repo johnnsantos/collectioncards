@@ -62,6 +62,7 @@ const Characters = ({ setFavorites, favorites }) => {
           {id === "rickandmorty" &&
             characterList.results?.map((character, index) => (
               <CharacterCard
+                route={id}
                 setFavorites={setFavorites}
                 favorites={favorites}
                 key={index}
@@ -71,12 +72,13 @@ const Characters = ({ setFavorites, favorites }) => {
           {id === "pokemon" &&
             characterList.results?.map((character, index) => (
               <CharacterCard
+                route={id}
                 setFavorites={setFavorites}
                 favorites={favorites}
                 key={index}
                 data={{
                   ...character,
-                  image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
                     character.url.split("/")[6]
                   }.png`,
                 }}

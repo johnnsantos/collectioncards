@@ -6,6 +6,7 @@ const contentStyle = {
   width: "100%",
   maxWidth: "1920px",
   margin: "0 auto 5vh",
+  borderRadius: "10px",
 };
 
 const Home = () => {
@@ -22,7 +23,7 @@ const Home = () => {
         >
           Rick e Morty + Pokemon
         </h1>
-        <Carousel autoplay>
+        <Carousel autoplay style={{ borderRadius: "10px" }}>
           <div>
             <img
               style={contentStyle}

@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import Loading from "../../loading.gif";
 import { message } from "antd";
 
-const CharacterCard = ({ data, setFavorites }) => {
+const CharacterCard = ({ data, setFavorites, route }) => {
   const { pathname } = useLocation();
   const { name, image } = data;
   const id = data.id !== undefined ? data.id : "";
@@ -50,7 +50,7 @@ const CharacterCard = ({ data, setFavorites }) => {
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} key={id}>
-      <StyledCard key={id}>
+      <StyledCard key={id} route={route}>
         <CardHeader
           avatar={<Avatar src={image ? image : Loading}></Avatar>}
           title={name}
