@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { motion } from "framer-motion";
 import { useLocation, useParams } from "react-router-dom";
-import { Request } from "../../Request";
 import CharacterCard from "../../components/CharacterCard";
 import { useEffect, useState } from "react";
 import { Grid } from "@material-ui/core";
 import { StyledBox, StyledPagination } from "./styles";
+import axios from "axios";
 
 const Characters = ({ setFavorites, favorites }) => {
   const { id } = useParams();
@@ -14,15 +14,23 @@ const Characters = ({ setFavorites, favorites }) => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
 
+  const GET = async (endpoint) => {
+    let res = await axios.get(endpoint);
+    return res.data;
+  };
+
   useEffect(() => {
     const getCharacterList = async () => {
-      const URL =
-        (id === "rickandmorty" &&
-          `https://rickandmortyapi.com/api/character/?page=${page}`) ||
-        (id === "pokemon" &&
-          `https://pokeapi.co/api/v2/pokemon?offset=${page}&limit=20`);
-      if (id === "rickandmorty" || id === "pokemon") {
-        setCharacterList(await Request(URL));
+      if (id === "rickandmorty") {
+        setCharacterList(
+          await GET(`https://rickandmortyapi.com/api/character/?page=${page}`)
+        );
+      } else if (id === "pokemon") {
+        setCharacterList(
+          await GET(
+            `https://pokeapi.co/api/v2/pokemon/?offset=${page}&limit=20`
+          )
+        );
       }
     };
     getCharacterList();
@@ -35,10 +43,6 @@ const Characters = ({ setFavorites, favorites }) => {
     };
     getTotalPages(characterList);
   }, [characterList]);
-
-  const handleChange = (e, value) => {
-    setPage(value);
-  };
 
   return (
     <motion.div
@@ -83,7 +87,7 @@ const Characters = ({ setFavorites, favorites }) => {
       <StyledPagination
         count={totalPages}
         page={page}
-        onChange={handleChange}
+        onChange={(e, value) => setPage(value)}
       />
     </motion.div>
   );

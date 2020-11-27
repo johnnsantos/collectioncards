@@ -25,11 +25,14 @@ export const StyledCardMedia = styled(CardMedia)`
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: grayscale(0.5);
-  opacity: 0.7;
+  filter: grayscale(0.7);
+  opacity: 0.9;
 
   &:hover {
     filter: grayscale(0);
     opacity: 1;
+    padding-left: 83%;
+    padding-top: 83%;
+    transition: all 0.5s ease-in-out;
   }
 `;
