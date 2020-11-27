@@ -12,7 +12,7 @@ export const StyledCard = styled(Card)`
     if (props.route === "pokemon") {
       return `url("https://i.pinimg.com/originals/95/cc/e0/95cce097b0febec31f67ecc2f574830f.jpg");`;
     } else {
-      return `url("https://image.freepik.com/free-vector/space-galaxy-cosmic-card_24908-31258.jpg");`;
+      return `url("https://i.pinimg.com/originals/e1/1a/a3/e11aa37a17e7fc010243dc7b830ec028.jpg");`;
     }
   }};
 
@@ -27,15 +27,14 @@ export const StyledCard = styled(Card)`
     } else {
       return `linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.3) 0%,
-      rgba(248, 172, 255, 0.8) 100%
+      rgba(255, 243, 176, 0.986) 0%,
+      rgba(255, 209, 109, 0.8) 100%
     ),
-    url("https://image.freepik.com/free-vector/space-galaxy-cosmic-card_24908-31258.jpg");`;
+    url("https://i.pinimg.com/originals/e1/1a/a3/e11aa37a17e7fc010243dc7b830ec028.jpg");`;
     }
   }};
 
   cursor: pointer;
-  background-color: #fff8ea;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -46,6 +45,7 @@ export const StyledCard = styled(Card)`
 `;
 
 export const StyledCardMedia = styled(CardMedia)`
+  border-radius: 10px;
   height: 40px;
   margin: auto;
   padding-left: 80%;
