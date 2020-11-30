@@ -93,7 +93,10 @@ const Characters = ({ setFavorites, favorites }) => {
       <StyledPagination
         count={totalPages}
         page={page}
-        onChange={(e, value) => setPage(value)}
+        onChange={(e, value) => {
+          setPage(value);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
       />
     </motion.div>
   );

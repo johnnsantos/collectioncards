@@ -6,10 +6,9 @@ import {
   CardHeader,
   Avatar,
   Grid,
-  Button,
   Card,
 } from "@material-ui/core";
-import { StyledCardMedia } from "./styles";
+import { StyledCardMedia, StyledButton } from "./styles";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -48,14 +47,14 @@ const Home = () => {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <Button
+              <StyledButton
                 variant="contained"
                 color="primary"
                 component={Link}
                 to="/pokemon"
               >
                 Ir para pokemons
-              </Button>
+              </StyledButton>
             </CardActions>
           </Card>
         </Grid>
@@ -80,14 +79,14 @@ const Home = () => {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <Button
+              <StyledButton
                 variant="contained"
                 color="primary"
                 component={Link}
                 to="/rickandmorty"
               >
                 Ir para Rick and Morty
-              </Button>
+              </StyledButton>
             </CardActions>
           </Card>
         </Grid>
