@@ -5,6 +5,7 @@ import StarIcon from "@material-ui/icons/Star";
 import HomeIcon from "@material-ui/icons/Home";
 import { CgPokemon } from "react-icons/cg";
 import { GiMaterialsScience } from "react-icons/gi";
+import PieChartIcon from "@material-ui/icons/PieChart";
 
 const Menu = () => {
   const { pathname } = useLocation();
@@ -50,6 +51,13 @@ const Menu = () => {
             component={Link}
             to="/favorites/rickandmorty"
             value="/favorites/rickandmorty"
+          />
+          <StyledTab
+            icon={<PieChartIcon />}
+            label="Gráfico"
+            component={Link}
+            to="/chart"
+            value="/chart"
           />
         </Tabs>
       </StyledAppBar>
