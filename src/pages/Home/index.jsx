@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
-import { StyledDiv } from "./styles";
-import { Carousel } from "antd";
-
-const contentStyle = {
-  width: "100%",
-  maxWidth: "1920px",
-  margin: "0 auto 5vh",
-  borderRadius: "10px",
-};
+import {
+  CardActions,
+  CardContent,
+  Typography,
+  CardHeader,
+  Avatar,
+  Grid,
+  Button,
+  Card,
+} from "@material-ui/core";
+import { StyledCardMedia } from "./styles";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -17,31 +20,84 @@ const Home = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
-      <StyledDiv>
-        <h1
-          style={{ textAlign: "center", fontWeight: "bold", color: "#9b4c1e" }}
-        >
-          Rick e Morty + Pokemon
-        </h1>
-        <Carousel autoplay style={{ borderRadius: "10px" }}>
-          <div>
-            <img
-              style={contentStyle}
-              src="https://i.pinimg.com/originals/e9/7c/c3/e97cc329984a848cab048cad41cea08e.jpg"
-              alt="Rick and Morty"
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justify="center"
+        spacing={2}
+      >
+        <Grid item xs={12} sm={6} md={6} lg={6} key={"1"}>
+          <Card key={"1"}>
+            <CardHeader
+              avatar={
+                <Avatar src="https://img.redbull.com/images/c_fill,g_auto,w_790,h_527/q_auto,f_auto/redbullcom/2016/09/20/1331818966444_2/pok%C3%A9mon-super-mystery-dungeon"></Avatar>
+              }
+              title="Pokemons"
             />
-          </div>
-          <div>
-            <img
-              style={contentStyle}
-              src="https://uhdwallpapers.org/uploads/converted/19/05/11/pokemon-detective-pikachu-1920x1080_898558-mm-90.jpg"
-              alt="Pokemon"
+            <StyledCardMedia image="https://img.redbull.com/images/c_fill,g_auto,w_790,h_527/q_auto,f_auto/redbullcom/2016/09/20/1331818966444_2/pok%C3%A9mon-super-mystery-dungeon" />
+            <CardContent>
+              <Typography
+                variant="h6"
+                color="textPrimary"
+                component="p"
+                style={{ textTransform: "capitalize" }}
+                align="center"
+              >
+                Pokemons
+              </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/pokemon"
+              >
+                Ir para pokemons
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} md={6} lg={6} key={"2"}>
+          <Card key={"2"}>
+            <CardHeader
+              avatar={
+                <Avatar src="https://ze-robot.com/images/source/319.jpg"></Avatar>
+              }
+              title="Rick and Morty"
             />
-          </div>
-        </Carousel>
-      </StyledDiv>
+            <StyledCardMedia image="https://ze-robot.com/images/source/319.jpg" />
+            <CardContent>
+              <Typography
+                variant="h6"
+                color="textPrimary"
+                component="p"
+                style={{ textTransform: "capitalize" }}
+                align="center"
+              >
+                Rick and Morty
+              </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/rickandmorty"
+              >
+                Ir para Rick and Morty
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      </Grid>
     </motion.div>
   );
 };
 
 export default Home;
+
+// https://i.pinimg.com/originals/e9/7c/c3/e97cc329984a848cab048cad41cea08e.jpg
+
+// https://uhdwallpapers.org/uploads/converted/19/05/11/pokemon-detective-pikachu-1920x1080_898558-mm-90.jpg

@@ -1,27 +1,21 @@
 import styled from "styled-components";
-import { AppBar, Tab } from "@material-ui/core";
+import { Toolbar, List } from "@material-ui/core";
 
-export const StyledAppBar = styled(AppBar)`
-  text-align: center;
-  margin: 0 auto;
-  width: 90%;
-  border-radius: 5px;
-  background-color: #9c4b14;
+export const StyledList = styled(List)`
   svg {
     font-size: 2rem;
   }
+
+  a:hover {
+    color: #a17150;
+  }
 `;
 
-export const StyledTab = styled(Tab)`
-  margin: 0 5px 0;
-  text-transform: capitalize;
+export const StyledToolbar = styled(Toolbar)`
+  color: white;
+  background-color: #a17050;
 
-  &:hover {
-    color: #ffce46;
-    background-color: #a17150;
-  }
-
-  a {
-    color: inherit;
+  h6 {
+    color: white;
   }
 `;
