@@ -75,29 +75,13 @@ const ResponsiveDrawer = (props) => {
     <div>
       <div className={classes.toolbar} />
       <StyledList>
-        <ListItem
-          button
-          component={Link}
-          to="/"
-          key="/"
-          onClick={() => {
-            setMobileOpen(!mobileOpen);
-          }}
-        >
+        <ListItem button component={Link} to="/" key="/">
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText>Home</ListItemText>
         </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to="/pokemon"
-          key="/pokemon"
-          onClick={() => {
-            setMobileOpen(!mobileOpen);
-          }}
-        >
+        <ListItem button component={Link} to="/pokemon" key="/pokemon">
           <ListItemIcon>
             <CgPokemon />
           </ListItemIcon>
@@ -108,9 +92,6 @@ const ResponsiveDrawer = (props) => {
           component={Link}
           to="/rickandmorty"
           key="/rickandmorty"
-          onClick={() => {
-            setMobileOpen(!mobileOpen);
-          }}
         >
           <ListItemIcon>
             <GiMaterialsScience />
@@ -122,9 +103,6 @@ const ResponsiveDrawer = (props) => {
           component={Link}
           to="/favorites/pokemon"
           key="/favorites/pokemon"
-          onClick={() => {
-            setMobileOpen(!mobileOpen);
-          }}
         >
           <ListItemIcon>
             <StarIcon />
@@ -136,24 +114,13 @@ const ResponsiveDrawer = (props) => {
           component={Link}
           to="/favorites/rickandmorty"
           key="/favorites/rickandmorty"
-          onClick={() => {
-            setMobileOpen(!mobileOpen);
-          }}
         >
           <ListItemIcon>
             <StarIcon />
           </ListItemIcon>
           <ListItemText>Rick Morty Favoritos</ListItemText>
         </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to="/chart"
-          key="/chart"
-          onClick={() => {
-            setMobileOpen(!mobileOpen);
-          }}
-        >
+        <ListItem button component={Link} to="/chart" key="/chart">
           <ListItemIcon>
             <PieChartIcon />
           </ListItemIcon>
