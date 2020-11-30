@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { CardMedia } from "@material-ui/core";
+import { CardMedia, Button } from "@material-ui/core";
 
 export const StyledCardMedia = styled(CardMedia)`
   border-radius: 10px;
@@ -19,5 +19,15 @@ export const StyledCardMedia = styled(CardMedia)`
     padding-left: 83%;
     padding-top: 83%;
     transition: all 0.5s ease-in-out;
+  }
+`;
+
+export const StyledButton = styled(Button)`
+  width: 100%;
+  background-color: #a17150;
+
+  &:hover {
+    color: yellow;
+    background-color: #d17e47;
   }
 `;

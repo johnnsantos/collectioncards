@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
@@ -151,14 +150,13 @@ const ResponsiveDrawer = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Pokemon + Rick e Morty
+          <Typography variant="h6" noWrap align="center" display="block">
+            Pokemon &amp; Rick e Morty
           </Typography>
         </StyledToolbar>
       </AppBar>
       <BrowserRouter>
         <nav className={classes.drawer}>
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Hidden smUp implementation="css">
             <Drawer
               container={container}
@@ -170,7 +168,7 @@ const ResponsiveDrawer = (props) => {
                 paper: classes.drawerPaper,
               }}
               ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
+                keepMounted: true,
               }}
             >
               {drawer}
@@ -194,7 +192,6 @@ const ResponsiveDrawer = (props) => {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/chart" component={Chart} />
-              <Route exact path="/drawer" component={Drawer} />
               <Route exact path="/:id" component={Characters} />
               <Route exact path="/favorites/:id" component={Favorites} />
             </Switch>
